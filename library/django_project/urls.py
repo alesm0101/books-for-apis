@@ -22,5 +22,7 @@ from django.urls import include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/", include("apis.urls")),  # using api app to access to book
+    path("book/api/", include("books.api_urls")),  # using book directly with apiview
     path("", include("books.urls")),
 ]
