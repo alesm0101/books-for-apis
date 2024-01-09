@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os  ### for environ
 from pathlib import Path
 from .custom_settings import (
     OWN_INSTALLED_APPS,
@@ -33,10 +34,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-7u%c9immhzwus2s4krmy)cut-84%_ya_7b(@iv26exu-qlskl="
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+### DEBUG = True
+DEBUG = "RENDER" not in os.environ
 
 ALLOWED_HOSTS = []
+
 ALLOWED_HOSTS += ALLOWED_HOSTS
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')if RENDER_EXTERNAL_HOSTNAME:    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Application definition
 
@@ -130,7 +134,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-# STATIC_URL = "static/"
+### STATIC_URL = "static/"
 STATIC_URL = STATIC_URL
 STATICFILES_DIRS = STATICFILES_DIRS
 STATIC_ROOT = STATIC_ROOT
