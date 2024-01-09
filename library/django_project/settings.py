@@ -11,7 +11,16 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-from .custom_settings import OWN_INSTALLED_APPS
+from .custom_settings import (
+    OWN_INSTALLED_APPS,
+    OWN_MIDDLEWARE,
+    STATIC_URL,
+    STATICFILES_DIRS,
+    STATIC_ROOT,
+    STATICFILES_STORAGE,
+    ALLOWED_HOSTS,
+)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +36,7 @@ SECRET_KEY = "django-insecure-7u%c9immhzwus2s4krmy)cut-84%_ya_7b(@iv26exu-qlskl=
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS += ALLOWED_HOSTS
 
 # Application definition
 
@@ -51,6 +60,9 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+MIDDLEWARE += OWN_MIDDLEWARE
+
 
 ROOT_URLCONF = "django_project.urls"
 
@@ -118,7 +130,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = "static/"
+# STATIC_URL = "static/"
+STATIC_URL = STATIC_URL
+STATICFILES_DIRS = STATICFILES_DIRS
+STATIC_ROOT = STATIC_ROOT
+STATICFILES_STORAGE = STATICFILES_STORAGE
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
