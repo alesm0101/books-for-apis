@@ -23,4 +23,7 @@
 `python3 manage.py collectstatic`
 `python3 -m pip install gunicorn~=20.1.0`
 
+`python3 -m pip install 'environs[django]==9.5.0'`
+`python3 -c "import secrets; print(secrets.token_urlsafe())"`
+
 # setup

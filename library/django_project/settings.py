@@ -16,12 +16,16 @@ from .custom_settings import (
     OWN_INSTALLED_APPS,
     OWN_MIDDLEWARE,
     STATIC_URL,
+    OWN_ALLOWED_HOSTS,
     STATICFILES_DIRS,
     STATIC_ROOT,
     STATICFILES_STORAGE,
-    OWN_ALLOWED_HOSTS,
 )
 
+from environs import Env
+
+env = Env()
+env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,21 +39,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-SECRET_KEY = os.environ.get(
-    "SECRET_KEY",
-    default="django-insecure-7u%c9immhzwus2s4krmy)cut-84%_ya_7b(@iv26exu-qlskl=",
-)
-
+### SECRET_KEY = os.environ.get("SECRET_KEY", default="django-insecure-7u%c9immhzwus2s4krmy)cut-84%_ya_7b(@iv26exu-qlskl=")
+SECRET_KEY = env.str("SECRET_KEY", default=None)
 ### DEBUG = True
 # DEBUG = "RENDER" not in os.environ
-DEBUG = (
-    os.environ.get("DEBUG_VALUE") is not None
-    and os.environ.get("DEBUG_VALUE").lower() == "true"
-)
-
+# DEBUG = os.environ.get("DEBUG_VALUE") is not None and os.environ.get("DEBUG_VALUE").lower() == "true"
+DEBUG = env.bool("DEBUG_VALUE", default=False)
 ALLOWED_HOSTS = []
 
 ALLOWED_HOSTS += OWN_ALLOWED_HOSTS
+
+### for render.com
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
@@ -148,9 +148,6 @@ USE_TZ = True
 
 ### STATIC_URL = "static/"
 STATIC_URL = STATIC_URL
-STATICFILES_DIRS = STATICFILES_DIRS
-STATIC_ROOT = STATIC_ROOT
-STATICFILES_STORAGE = STATICFILES_STORAGE
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
