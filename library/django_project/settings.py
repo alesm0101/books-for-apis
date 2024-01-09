@@ -19,7 +19,7 @@ from .custom_settings import (
     STATICFILES_DIRS,
     STATIC_ROOT,
     STATICFILES_STORAGE,
-    ALLOWED_HOSTS,
+    OWN_ALLOWED_HOSTS,
 )
 
 
@@ -42,11 +42,14 @@ SECRET_KEY = os.environ.get(
 
 ### DEBUG = True
 # DEBUG = "RENDER" not in os.environ
-DEBUG = os.environ.get("DEBUG_VALUE").lower() == "true"
+DEBUG = (
+    os.environ.get("DEBUG_VALUE") is not None
+    and os.environ.get("DEBUG_VALUE").lower() == "true"
+)
 
 ALLOWED_HOSTS = []
 
-ALLOWED_HOSTS += ALLOWED_HOSTS
+ALLOWED_HOSTS += OWN_ALLOWED_HOSTS
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
