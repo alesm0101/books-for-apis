@@ -41,7 +41,8 @@ SECRET_KEY = os.environ.get(
 )
 
 ### DEBUG = True
-DEBUG = "RENDER" not in os.environ
+# DEBUG = "RENDER" not in os.environ
+DEBUG = os.environ.get("DEBUG_VALUE").lower() == "true"
 
 ALLOWED_HOSTS = []
 
