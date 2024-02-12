@@ -42,6 +42,13 @@ INSTALLED_APPS = [
 # INSTALLED_APPS.extend(CUSTOM_INSTALLED_APPS)
 INSTALLED_APPS += CUSTOM_INSTALLED_APPS
 
+# unrestricted access ### Added here
+OWN_REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": {
+        "rest_framework.permissions.AllowAny",
+    }
+}
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",

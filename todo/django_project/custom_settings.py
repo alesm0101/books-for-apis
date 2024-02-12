@@ -5,7 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 CUSTOM_INSTALLED_APPS = [
     # 3rd party
-    # "rest_framework",
+    "rest_framework",
     # "whitenoise.runserver_nostatic",  # <- whitenoise
     # local
     "todos.apps.TodosConfig",

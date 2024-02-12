@@ -16,7 +16,6 @@
 
 3.14 is requiered for django 5
 
-`python3 -m pip install djangorestframework~=3.14.0`
 `python3 manage.py startapp apis`
 
 `python3 -m pip install whitenoise==6.0.0`
