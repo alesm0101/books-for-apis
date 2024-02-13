@@ -165,3 +165,6 @@ STATIC_URL = STATIC_URL
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+STATICFILES_DIRS = STATICFILES_DIRS
+STATIC_ROOT = STATIC_ROOT
+STATICFILES_STORAGE = STATICFILES_STORAGE
