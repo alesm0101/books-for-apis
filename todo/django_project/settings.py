@@ -17,7 +17,6 @@ from .custom_settings import (
     STATIC_URL,
     OWN_ALLOWED_HOSTS,
     STATICFILES_DIRS,
-    STATIC_ROOT,
     STATICFILES_STORAGE,
 )
 from pathlib import Path
@@ -166,5 +165,5 @@ STATIC_URL = STATIC_URL
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 STATICFILES_DIRS = STATICFILES_DIRS
-STATIC_ROOT = STATIC_ROOT
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_STORAGE = STATICFILES_STORAGE
