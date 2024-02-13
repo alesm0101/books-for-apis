@@ -9,8 +9,27 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-from .custom_settings import CUSTOM_INSTALLED_APPS
+from .custom_settings import (
+    CUSTOM_INSTALLED_APPS,
+    OWN_MIDDLEWARE,
+    CORS_ALLOWED_ORIGINS,
+    CSRF_TRUSTED_ORIGINS,
+    STATIC_URL,
+    OWN_ALLOWED_HOSTS,
+    STATICFILES_DIRS,
+    STATIC_ROOT,
+    STATICFILES_STORAGE,
+)
 from pathlib import Path
+
+import os  ### for environ
+
+###
+from environs import Env
+
+env = Env()
+env.read_env()
+###
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +39,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-#c3p0z9+&vk@t0l&885_q8#p84t%*=hc4u7h9du%p_g$)2xs+)"
-
+# SECRET_KEY = "django-insecure-#c3p0z9+&vk@t0l&885_q8#p84t%*=hc4u7h9du%p_g$)2xs+)"
+SECRET_KEY = env.str("SECRET_KEY_TODO", default=None)
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+### DEBUG = True
+# DEBUG = "RENDER" not in os.environ
+# DEBUG = os.environ.get("DEBUG_VALUE") is not None and os.environ.get("DEBUG_VALUE").lower() == "true"
+DEBUG = env.bool("DEBUG_VALUE", default=False)
 
 ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS += OWN_ALLOWED_HOSTS
+
+### for render.com
+RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 
 # Application definition
@@ -58,6 +87,10 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+MIDDLEWARE += OWN_MIDDLEWARE
+
+CORS_ALLOWED_ORIGIN = CORS_ALLOWED_ORIGINS
+CSRF_TRUSTED_ORIGINS = CSRF_TRUSTED_ORIGINS
 
 ROOT_URLCONF = "django_project.urls"
 
