@@ -21,4 +21,7 @@ from django.urls import path, include
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/", include("posts.urls")),
+    path(
+        "api-auth/", include("rest_framework.urls")
+    ),  # add login btn to http://127.0.0.1:8000/api/v1/
 ]

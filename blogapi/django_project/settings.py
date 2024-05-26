@@ -47,7 +47,10 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.AllowAny",  # insecure for now
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly",
+        # "rest_framework.permissions.AllowAny",  # insecure
+        # "rest_framework.permissions.IsAdminUser",
+        # "rest_framework.permissions.IsAuthenticated",
     ]
 }
 
