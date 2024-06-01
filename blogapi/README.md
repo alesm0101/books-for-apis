@@ -25,7 +25,11 @@
 `python3 -m pip install djangorestframework~=3.14.0`
 (3.14 is requiered for django 5)
 
-`python3 -m pip install django-cors-headers~=3.10.0`
+`python3 -m pip install django-cors-headers~=3.10.0` then `python3 manage.py migrate`
+
+`python3 -m pip install dj-rest-auth==6.0.0` then `python3 manage.py migrate` (this requiere `pip install requests` if it is not in the system)
+
+`python3 -m pip install django-allauth==0.63.2` then `python3 manage.py migrate`
 
 ---
 

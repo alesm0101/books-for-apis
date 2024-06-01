@@ -21,7 +21,22 @@ from django.urls import path, include
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/", include("posts.urls")),
+    path("api-auth/", include("rest_framework.urls")),
+    # api-auth -> add login btn to http://127.0.0.1:8000/api/v1/
+    path("api/v1/dj-rest-auth/", include("dj_rest_auth.urls")),
     path(
-        "api-auth/", include("rest_framework.urls")
-    ),  # add login btn to http://127.0.0.1:8000/api/v1/
+        "api/v1/dj-rest-auth/registration/", include("dj_rest_auth.registration.urls")
+    ),
 ]
+
+#  ex url: http://127.0.0.1:8000/api/v1/dj-rest-auth/login/
+
+# | Endpoint                            | HTTP verb |
+# |----------------------------------- -|-----------|
+# |/                                    | GET       |
+# |/:pk                                 | GET       |
+# |/dj-rest-auth/registration           | POST      |
+# |/dj-rest-auth/login                  | POST      |
+# |/dj-rest-auth/logout                 | GET       |
+# |/dj-rest-auth/password/reset         | POST      |
+# |/dj-rest-auth/password/reset/confirm | POST      |

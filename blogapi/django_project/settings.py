@@ -37,9 +37,18 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     # 3rd-party app
     "rest_framework",
+    "rest_framework.authtoken",  # included in rest_framework
     "corsheaders",
+    "dj_rest_auth",
+    # "dj_rest_auth"for login logout
+    "allauth",
+    # "allauth" for registration user
+    "allauth.account",
+    "allauth.socialaccount",
+    "dj_rest_auth.registration",
     # Local
     "accounts.apps.AccountsConfig",
     "posts.apps.PostsConfig",
@@ -51,7 +60,12 @@ REST_FRAMEWORK = {
         # "rest_framework.permissions.AllowAny",  # insecure
         # "rest_framework.permissions.IsAdminUser",
         # "rest_framework.permissions.IsAuthenticated",
-    ]
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",  # to login/logout
+        # "rest_framework.authentication.BasicAuthentication",  # to pass session ID in the http header
+        "rest_framework.authentication.TokenAuthentication",  # generate tokens on the server
+    ],
 }
 
 MIDDLEWARE = [
@@ -64,6 +78,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "allauth.account.middleware.AccountMiddleware",  # for django allauth
 ]
 
 CORS_ORIGIN_WHITELIST = (
@@ -83,13 +98,16 @@ TEMPLATES = [
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.debug",
-                "django.template.context_processors.request",
+                "django.template.context_processors.request",  # for django allauth
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"  # for django allauth
+SITE_ID = 1  # for django allauth
 
 WSGI_APPLICATION = "django_project.wsgi.application"
 
